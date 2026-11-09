@@ -11,11 +11,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    env:
-      # Ensure Gradle/Kotlin always run with a supported JDK.
-      JAVA_HOME: ${{ env.JAVA_HOME_17_X64 }}
-      ORG_GRADLE_JAVA_HOME: ${{ env.JAVA_HOME_17_X64 }}
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -33,7 +28,6 @@ jobs:
           java -version
           echo "JAVA_HOME=$JAVA_HOME"
           ./gradlew --version
-          ./gradlew -q javaToolchains || true
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
