@@ -30,14 +30,16 @@ jobs:
           ./gradlew --version
 
       - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
+  uses: android-actions/setup-android@v3
+  with:
+    cmdline-tools-version: 'latest'
 
-      - name: Accept Android SDK licenses
-        run: yes | sdkmanager --licenses || true
+- name: Accept Android SDK licenses
+  run: yes | sdkmanager --licenses || true
 
-      - name: Install required Android SDK components
-        run: |
-          sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
+- name: Install required Android SDK components
+  run: |
+    sdkmanager --install "cmdline-tools;latest" "platform-tools" "platforms;android-34" "build-tools;34.0.0"
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
